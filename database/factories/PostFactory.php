@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,14 +18,20 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $user_count = User::all()->count();
         $title = $this->faker->unique()->sentence();
         return [
+            'user_id' => $this->faker->numberBetween(1, $user_count),
             'title' => $title,
             'slug' => Str::slug($title),
             'excerpt' => $this->faker->text(),
             'body' => $this->faker->paragraphs(5, true),
-            'published' => $this->faker->boolean(),
-            'min_to_read' => $this->faker->randomDigitNotNull(),
+            'image' => $this->faker->imageUrl(),
+            'published_at' => $this->faker->dateTime,
+            'published_through' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
+            'min_to_read' => $this->faker->numberBetween(1, 29),
+            'created_at' => $this->faker->dateTime(),
+            'updated_at' => $this->faker->dateTime(),
         ];
     }
 }
