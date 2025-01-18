@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
-use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
-class PostController extends Controller
+class PostController
 {
     /**
      * Display a listing of the resource.
@@ -33,7 +33,13 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        if($request->image)
+        {
+//            TODO: swap $request->title with a real slug
+            $newImageName = uniqid() . '-' . $request->title . '.' . $request->image->extension();
+//            TODO: use drivers herebelow and some kind of user or blog subfolders
+            $request->image->move(public_path('images'), $newImageName);
+        }
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
