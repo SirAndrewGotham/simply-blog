@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\Language::class)->nullable()->constrained()->onDelete('SET NULL');
             $table->foreignIdFor(User::class)->nullable()->constrained()->onDelete('SET NULL');
             $table->string('title');
             $table->string('slug')->unique();

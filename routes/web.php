@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('posts', PostController::class);
+
+Route::get('/language/{locale}', LanguageController::class)->name('locale');
+

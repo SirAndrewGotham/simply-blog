@@ -41,4 +41,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function language(): BelongsTo
+    {
+        return $this->belongsTo(Language::class);
+    }
 }

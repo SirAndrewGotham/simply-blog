@@ -20,6 +20,14 @@
                     </x-nav-link>
                 </div>
             </div>
+            <div class="flex items-center justify-end pr-16 lg:pr-0">
+                <x-dark-mode />
+                @if(count(App\Models\Language::where('is_active', true)->get()) > 1)
+                    <div class="sm:flex px-4">
+                        <x-language-switcher />
+                    </div>
+                @endif
+            </div>
 
             @guest
 

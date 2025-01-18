@@ -14,7 +14,8 @@
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-gray-900 antialiased">
+{{--<body class="font-sans text-gray-900 antialiased">--}}
+<body x-cloak x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="font-sans text-gray-900 antialiased">
     @include('frontend.default.layouts.navigation')
     <!-- Page Heading -->
     @isset($header)
