@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Language;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,8 +24,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $languages = Language::where('is_active', true)->pluck('id')->toArray();
         $name = $this->faker->unique()->name();
         return [
+            'language_id' => $this->faker->randomElement($languages),
             'name' => $name,
             "slug" => Str::slug($name),
             'email' => fake()->unique()->safeEmail(),

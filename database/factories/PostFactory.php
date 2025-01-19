@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Language;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -18,9 +19,11 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $languages = Language::where('is_active', true)->pluck('id')->toArray();
         $user_count = User::all()->count();
         $title = $this->faker->unique()->sentence();
         return [
+            'language_id' => $this->faker->randomElement($languages),
             'user_id' => $this->faker->numberBetween(1, $user_count),
             'title' => $title,
             'slug' => Str::slug($title),
