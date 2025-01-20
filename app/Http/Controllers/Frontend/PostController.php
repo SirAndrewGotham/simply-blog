@@ -14,10 +14,12 @@ class PostController
      */
     public function index()
     {
-        $posts = DB::table('posts')
-            ->orderBy('id', 'asc', 1)
-            ->value('body');
-        dump($posts);
+//        $posts = DB::table('posts')
+//            ->orderBy('id', 'asc', 1)
+//            ->value('body');
+        $posts = Post::orderBy('updated_at', 'DESC')->paginate(5);
+
+        return view('frontend.'. config('simply-blog.front.theme').'.posts.index', compact('posts'));
     }
 
     /**
@@ -25,7 +27,7 @@ class PostController
      */
     public function create()
     {
-        //
+        return view('frontend.'. config('simply-blog.front.theme').'.posts.create');
     }
 
     /**
@@ -33,6 +35,7 @@ class PostController
      */
     public function store(StorePostRequest $request)
     {
+        dd($request);
         if($request->image)
         {
 //            TODO: swap $request->title with a real slug
@@ -47,7 +50,7 @@ class PostController
      */
     public function show(Post $post)
     {
-        //
+        return view('frontend.'. config('simply-blog.front.theme').'.posts.show', compact('post'));
     }
 
     /**

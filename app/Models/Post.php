@@ -14,6 +14,11 @@ class Post extends Model
 
     protected $guarded = ['id'];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     protected $dates = [
         'published_at',
         'published_through',
