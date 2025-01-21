@@ -5,10 +5,18 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\DB;
 
-class PostController
+class PostController implements \Illuminate\Routing\Controllers\HasMiddleware
 {
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(middleware: 'auth', except: ['index', 'show']),
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -35,7 +43,7 @@ class PostController
      */
     public function store(StorePostRequest $request)
     {
-        dd($request);
+//        dd($request);
         if($request->image)
         {
 //            TODO: swap $request->title with a real slug
@@ -43,6 +51,18 @@ class PostController
 //            TODO: use drivers herebelow and some kind of user or blog subfolders
             $request->image->move(public_path('images'), $newImageName);
         }
+
+        Post::create([
+            'title' => $request->title,
+            'excerpt' => $request->excerpt ?? null,
+            'body' => $request->body,
+            'image' => $newImageName ?? null,
+//            'published_at' => $request->published_at ?? null,
+//            'published_through' => $request->published_through ?? null,
+//            'min_to_read' => $request->min_to_read,
+        ]);
+
+        return redirect()->route('posts.index')->with('message', 'Your post has been added!');
     }
 
     /**
@@ -58,7 +78,7 @@ class PostController
      */
     public function edit(Post $post)
     {
-        //
+        return view('frontend.'. config('simply-blog.front.theme').'.posts.edit')->with('post', $post);
     }
 
     /**
@@ -66,7 +86,18 @@ class PostController
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        Post::where('slug', $post->slug)
+            ->update([
+                'title' => $request->title,
+                'excerpt' => $request->excerpt ?? null,
+                'body' => $request->body,
+    //            'image' => $newImageName ?? null,
+    //            'published_at' => $request->published_at ?? null,
+    //            'published_through' => $request->published_through ?? null,
+    //            'min_to_read' => $request->min_to_read,
+        ]);
+
+        return redirect()->route('posts.index')->with('message', 'Your post has been updated!');
     }
 
     /**
@@ -74,6 +105,7 @@ class PostController
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('posts.index')->with('message', 'Your post has been deleted!');
     }
 }

@@ -6,11 +6,29 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory, SoftDeletes;
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        self::creating(function ($model) {
+            $slug = Str::slug($model->title);
+            $originalSlug = $slug;
+            $count = 2;
+            while (static::whereSlug($slug)->exists()) {
+                $slug = $originalSlug . '-' . $count++;
+            }
+            $model->slug = $slug;
+
+            $model->user_id = auth()->id();
+        });
+    }
 
     protected $guarded = ['id'];
 

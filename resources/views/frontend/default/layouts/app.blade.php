@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 {{--<body class="font-sans text-gray-900 antialiased">--}}
-<body x-cloak x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="bg-white h-screen antialiased leading-none font-sans text-gray-900 ">
+<body x-cloak x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="bg-gray-100 h-screen antialiased leading-none font-sans text-gray-900 ">
 <div id="app">
     @include('frontend.default.layouts.navigation')
     <!-- Page Heading -->

@@ -11,7 +11,8 @@ class UpdatePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+//        return auth()->check() && auth()->user()->can('update-post');
+        return auth()->check();
     }
 
     /**
@@ -22,7 +23,8 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required',
+            'body' => 'required',
         ];
     }
 }
