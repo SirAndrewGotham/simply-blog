@@ -36,6 +36,7 @@ class PostFactory extends Factory
             'published_through' => $this->faker->dateTimeBetween('-1 month', '+1 month'),
             'min_to_read' => $this->faker->numberBetween(1, 29),
             'views' => $this->faker->numberBetween(0, 1000),
+            'allow_comments' => true,
             'created_at' => $this->faker->dateTime(),
             'updated_at' => $this->faker->dateTime(),
         ];

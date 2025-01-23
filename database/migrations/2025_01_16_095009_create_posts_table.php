@@ -25,6 +25,7 @@ return new class extends Migration
             $table->datetime('published_through')->nullable()->default(null);
             $table->unsignedBigInteger('min_to_read')->default(0);
             $table->bigInteger('views')->default(0);
+            $table->boolean('allow_comments')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

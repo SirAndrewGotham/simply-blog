@@ -33,6 +33,9 @@ class PostSeeder extends Seeder
 //            ]);
 //        });
 
-        Post::factory()->count(10)->create();
+        Post::factory()
+            ->count(10)
+//            ->hasComments(12)
+            ->create();
     }
 }

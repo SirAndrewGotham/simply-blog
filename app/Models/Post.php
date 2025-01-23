@@ -78,10 +78,10 @@ class Post extends Model
     /**
      * The has Many Relationship
      *
-     * @var array
+     * @return HasMany
      */
     public function comments(): HasMany
     {
-        return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Comment::class)->whereNull('comment_id');
     }
 }
