@@ -27,7 +27,11 @@ class Post extends Model
             }
             $model->slug = $slug;
 
-            $model->user_id = auth()->id();
+            // following code for the seeders to work correctly
+            if(auth()->id())
+            {
+                $model->user_id = auth()->id();
+            }
         });
     }
 

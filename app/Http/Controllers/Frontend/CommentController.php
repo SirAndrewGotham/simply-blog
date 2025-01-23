@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
-class CommentController extends Controller
+class CommentController
 {
-    public function __invoke(Request $request)
+    public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'body'=>'required',
         ]);

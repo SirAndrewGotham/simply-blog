@@ -40,4 +40,9 @@ class Comment extends Model
     {
         return $this->hasMany(Comment::class, 'comment_id');
     }
+
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Comment::class, 'comment_id');
+    }
 }
