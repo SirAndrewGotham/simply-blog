@@ -3,5 +3,6 @@
 {{--</svg>--}}
 
 <svg width="64px" height="64px">
-    {!! file_get_contents(public_path('assets/frontend/default/images/site_logo.svg')) !!}
+    <img src="{{ asset('assets/frontend/default/images/site_logo.png') }}" width="64px" height="64px" />
+{{--    {!! file_get_contents(public_path('assets/frontend/default/images/site_logo.svg')) !!}--}}
 </svg>

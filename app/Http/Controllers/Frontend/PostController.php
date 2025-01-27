@@ -25,7 +25,7 @@ class PostController implements \Illuminate\Routing\Controllers\HasMiddleware
 //        $posts = DB::table('posts')
 //            ->orderBy('id', 'asc', 1)
 //            ->value('body');
-        $posts = Post::orderBy('updated_at', 'DESC')->paginate(5);
+        $posts = Post::latest()->paginate(5);
 
         return view('frontend.'. config('simply-blog.front.theme').'.posts.index', compact('posts'));
     }
