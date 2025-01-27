@@ -18,7 +18,7 @@
                         </p>
                     </div>
                     <div x-data="{open: false}"
-                         class="hs-dropdown [--placement:dropdown-bottom-left] relative inline-flex">
+                         class="relative inline-block text-left dropdown">
                         <button
                             @click="open = !open"
                             class="inline-flex items-center p-2 text-sm font-medium text-right text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -32,7 +32,7 @@
                         <!-- Dropdown menu -->
                         <div x-show="open"
                              style="display: none;"
-                             class="w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+                             class="w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute right-0 z-10 mt-2 origin-top-right ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownMenuIconHorizontalButton">
                                 <li>
