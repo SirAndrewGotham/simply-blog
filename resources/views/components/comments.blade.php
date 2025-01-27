@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
                 @unless($comments->count())
-                    {{ __('Post your comments') }}
+                    {{ __('Discussion has not started yet') }}<br />{{ __('be first to post your comments.') }}
                 @else
                     {{ __('Discussions') }} ({{ $comments->count() }})
                 @endunless
