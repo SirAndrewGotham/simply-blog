@@ -17,10 +17,26 @@
                             </time>
                         </p>
                     </div>
-                    <div x-data="{open: false}"
+                    <div x-data="{
+                            open: false,
+                            toggle() {
+                                this.open = this.open ? this.close() : true
+                            },
+                            close(focusAfter) {
+                                this.open = false
+                                focusAfter && focusAfter.focus()
+                            }
+                        }"
+                         @keydown.escape.prevent.stop="close($refs.ddbutton)"
+                         @focusin.window="!$refs.ddpanel.contains($event.target) && close()"
+                         x-id="['dropdown-button']"
                          class="relative inline-block text-left dropdown">
                         <button
-                            @click="open = !open"
+                            x-ref="ddbuton"
+                            @click="toggle()"
+                            :area-expanded="open"
+                            :area-control="$id('dropdown-button')"
+                            type="button"
                             class="inline-flex items-center p-2 text-sm font-medium text-right text-gray-500 dark:text-gray-400 bg-gray-100 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                  fill="currentColor" viewBox="0 0 16 3">
@@ -30,7 +46,13 @@
                             <span aria-hidden="true" class="sr-only">{{ __('Comment settings') }}</span>
                         </button>
                         <!-- Dropdown menu -->
-                        <div x-show="open"
+                        <div
+                            x-ref="ddpanel"
+                            x-show="open"
+{{--                            x-transition:enter=""--}}
+                            x-transition.origin.top.right
+                             @click.outside="close($refs.button)"
+                             :id="$id('dropdown-button')"
                              style="display: none;"
                              class="w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 absolute right-0 z-10 mt-2 origin-top-right ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
